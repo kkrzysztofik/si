@@ -1,22 +1,44 @@
+#container {
+    background-color: #999999;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    left: 20px;
+    bottom: 20px;
+}
+
 #header {
-	background-color: #22FF22;
+    background-color: #22FF22;
+    width: 100%;
 }
 
 #content {
 }
 
 #left {
+    position: relative;
+    float: left;
+    overflow: hidden;
+    width: 150px;
 	background-color: #00CC22;
 }
 
 #center {
+    margin-left: 150px;
+    margin-right: 150px;
 	background-color: #00BB22;
 }
 
 #right {
-	background-color: #00AA22;
+    position: relative;
+    float: right;
+    overflow: hidden;
+    width: 150px;
+    background-color: #00AA22;
 }
 
 #footer {
+    clear: both;
 	background-color: #009922;
+    width: 100%;
 }
