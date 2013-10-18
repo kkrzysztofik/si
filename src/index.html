@@ -7,14 +7,61 @@
 	<meta name="Description" content="Tu wpisz opis zawartości strony" />
 	<meta name="Keywords" content="Tu wpisz wyrazy kluczowe rozdzielone przecinkami" />
 	<title>test</title>
-	<link href="style.css" rel="stylesheet">
+	<link href="style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<div id="container">
 		<div id="header">HEAD</div>
 		<div id="content">
 			<div id="left">LEFT</div>
-			<div id="center">CENTER</div>
+			<div id="center">
+                <form>
+                    <table>
+                        <tr>
+                            <td>Imię:</td>
+                            <td>
+                                <input type="text" name="imie" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Nazwisko:</td>
+                            <td>
+                                <input type="text" name="nazwisko" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Płeć:</td>
+                            <td>
+                                <input type="radio" name="plec" value="1">Mężczyzna</input>
+                                <input type="radio" name="plec" value="0">Kobieta</input>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Nazwisko panieńskie:</td>
+                            <td>
+                                <input type="text" name="nazw_panienskie" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Email:</td>
+                            <td>
+                                <input type="text" name="email" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Kod pocztowy:</td>
+                            <td>
+                                <input type="text" name="kod_pocztowy" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <input type="submit" value="Wyślij" />
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+			</div>
 			<div id="right">
 				<ul>
 					<li>
