@@ -9,7 +9,7 @@
 
 #header {
     background-color: #22FF22;
-    width: 100%;
+    padding: 20px;
 }
 
 #content {
@@ -24,8 +24,9 @@
 }
 
 #center {
-    margin-left: 150px;
-    margin-right: 150px;
+    padding: 10px;
+    margin: 10px 160px;
+    min-width: 300px;
 	background-color: #00BB22;
 }
 
@@ -40,5 +41,6 @@
 #footer {
     clear: both;
 	background-color: #009922;
-    width: 100%;
+    padding: 20px;
+    text-align: center;
 }

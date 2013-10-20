@@ -13,45 +13,64 @@
 	<div id="container">
 		<div id="header">HEAD</div>
 		<div id="content">
-			<div id="left">LEFT</div>
+			<div id="left">
+                <ul>
+                    <li>
+                        <a href="http://google.com">google.com</a>
+                    </li>
+                    <li>
+                        <a href="http://www.wp.pl">www.wp.pl</a>
+                    </li>
+                </ul>
+			</div>
+            <div id="right">
+                <ul>
+                    <li>
+                        <a href="http://google.com">google.com</a>
+                    </li>
+                    <li>
+                        <a href="http://www.wp.pl">www.wp.pl</a>
+                    </li>
+                </ul>
+            </div>
 			<div id="center">
-                <form>
+                <form action="" method="post">
                     <table>
                         <tr>
-                            <td>Imię:</td>
+                            <td><label for="imie">Imię:</label></td>
                             <td>
-                                <input type="text" name="imie" />
+                                <input id="imie" type="text" name="imie" />
                             </td>
                         </tr>
                         <tr>
-                            <td>Nazwisko:</td>
+                            <td><label for="nazwisko">Nazwisko:</label></td>
                             <td>
-                                <input type="text" name="nazwisko" />
+                                <input id="nazwisko" type="text" name="nazwisko" />
                             </td>
                         </tr>
                         <tr>
-                            <td>Płeć:</td>
+                            <td><label for="plec">Płeć:</label></td>
                             <td>
-                                <input type="radio" name="plec" value="1">Mężczyzna</input>
-                                <input type="radio" name="plec" value="0">Kobieta</input>
+                                <input id="plec" type="radio" name="plec" value="1">Mężczyzna</input>
+                                <input id="plec" type="radio" name="plec" value="0">Kobieta</input>
                             </td>
                         </tr>
                         <tr>
-                            <td>Nazwisko panieńskie:</td>
+                            <td><label for="nazw_panienskie">Nazwisko panieńskie:</label></td>
                             <td>
-                                <input type="text" name="nazw_panienskie" />
+                                <input id="nazw_panienskie" type="text" name="nazw_panienskie" />
                             </td>
                         </tr>
                         <tr>
-                            <td>Email:</td>
+                            <td><label for="email">Email:</label></td>
                             <td>
-                                <input type="text" name="email" />
+                                <input id="email" type="text" name="email" />
                             </td>
                         </tr>
                         <tr>
-                            <td>Kod pocztowy:</td>
+                            <td><label for="kod_pocztowy">Kod pocztowy:</label></td>
                             <td>
-                                <input type="text" name="kod_pocztowy" />
+                                <input id="kod_pocztowy" type="text" name="kod_pocztowy" />
                             </td>
                         </tr>
                         <tr>
@@ -61,16 +80,6 @@
                         </tr>
                     </table>
                 </form>
-			</div>
-			<div id="right">
-				<ul>
-					<li>
-						<a href="http://google.com">google.com</a>
-					</li>
-					<li>
-						<a href="http://www.wp.pl">www.wp.pl</a>
-					</li>
-				</ul>
 			</div>
 		</div>
 		<div id="footer">FOOT</div>
