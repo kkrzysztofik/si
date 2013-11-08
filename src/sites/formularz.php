@@ -52,16 +52,23 @@ $elements = array('imie', 'nazwisko', 'plec', 'nazw_panienskie', 'email', 'kod_p
 
 function check_if_exists($elements_array) {
     foreach($elements_array as $element){
-        if(!isset($_POST[$element]) or !sizeof($_POST[$element])){
-            echo($element . ' nie jest podany');
+        if(!isset($_POST[$element]) || !strlen($_POST[$element])){
+            echo($element . ' nie jest podany <br>');
             $error = true;
         }
     }
 }
 
 if(sizeof($_POST)) {
-    var_dump($_POST);
-
+    check_if_exists($elements);
+    if(!preg_match('/^[a-zA-Z0-9\.\-_]+\@[a-zA-Z0-9\.\-_]+\.[a-z]{2,4}$/D', $_POST['email'])) {
+        echo('Email jest nieprawidłowy!<br>');
+        $error = true;
+    }
 } else {
+    $error = true;
+}
+
+if($error){
     echo $form;
 }
