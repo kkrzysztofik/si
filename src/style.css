@@ -6,6 +6,7 @@
     left: 20px;
     bottom: 20px;
     min-width: 700px;
+    min-height: 400px;
 }
 
 #header {
@@ -38,6 +39,7 @@
     right: 170px;
     min-width: 300px;
 	background-color: #00BB22;
+    padding: 20px;
 }
 
 #right {
