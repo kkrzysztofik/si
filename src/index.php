@@ -16,10 +16,13 @@
 			<div id="left">
                 <ul>
                     <li>
-                        <a href="http://google.com">google.com</a>
+                        <a href="index.php?site=0">Strona główna</a>
                     </li>
                     <li>
-                        <a href="http://www.wp.pl">www.wp.pl</a>
+                        <a href="index.php?site=1">Formularz</a>
+                    </li>
+                    <li>
+                        <a href="index.php?site=2">Zawartość sesji</a>
                     </li>
                 </ul>
 			</div>
@@ -34,52 +37,24 @@
                 </ul>
             </div>
 			<div id="center">
-                <form action="" method="post">
-                    <table>
-                        <tr>
-                            <td><label for="imie">Imię:</label></td>
-                            <td>
-                                <input id="imie" type="text" name="imie" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><label for="nazwisko">Nazwisko:</label></td>
-                            <td>
-                                <input id="nazwisko" type="text" name="nazwisko" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><label for="plec">Płeć:</label></td>
-                            <td>
-                                <input id="plec" type="radio" name="plec" value="1">Mężczyzna</input>
-                                <input id="plec" type="radio" name="plec" value="0">Kobieta</input>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><label for="nazw_panienskie">Nazwisko panieńskie:</label></td>
-                            <td>
-                                <input id="nazw_panienskie" type="text" name="nazw_panienskie" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><label for="email">Email:</label></td>
-                            <td>
-                                <input id="email" type="text" name="email" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><label for="kod_pocztowy">Kod pocztowy:</label></td>
-                            <td>
-                                <input id="kod_pocztowy" type="text" name="kod_pocztowy" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <input type="submit" value="Wyślij" />
-                            </td>
-                        </tr>
-                    </table>
-                </form>
+                <?php
+                    if(!isset($_GET['site'])) {
+                        $site = 0;
+                    } else {
+                        $site = (int)$_GET['site'];
+                    }
+                    switch ($site) {
+                        case 0:
+                            include_once('sites/glowna.php');
+                            break;
+                        case 1:
+                            include_once('sites/formularz.php');
+                            break;
+                        case 2:
+                            include_once('sites/sesja.php');
+                            break;
+                    }
+                ?>
 			</div>
 		</div>
 		<div id="footer">FOOT</div>
