@@ -5,41 +5,56 @@
     right: 20px;
     left: 20px;
     bottom: 20px;
+    min-width: 700px;
 }
 
 #header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
     background-color: #22FF22;
     padding: 20px;
+    text-align: center;
 }
 
 #content {
 }
 
 #left {
-    position: relative;
-    float: left;
+    position: absolute;
+    left: 10px;
+    top: 70px;
     overflow: hidden;
     width: 150px;
+    border: 10px;
 	background-color: #00CC22;
 }
 
 #center {
-    padding: 10px;
-    margin: 10px 160px;
+    position: absolute;
+    top: 70px;
+    left: 170px;
+    right: 170px;
     min-width: 300px;
 	background-color: #00BB22;
 }
 
 #right {
-    position: relative;
-    float: right;
+    position: absolute;
+    right: 10px;
+    top: 70px;
     overflow: hidden;
     width: 150px;
+    border: 10px;
     background-color: #00AA22;
 }
 
 #footer {
-    clear: both;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
 	background-color: #009922;
     padding: 20px;
     text-align: center;
