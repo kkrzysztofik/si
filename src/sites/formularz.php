@@ -50,8 +50,12 @@ if($error){
             <tr>
                 <td><label for="plec">Płeć:</label></td>
                 <td>
-                    <input id="plec" type="radio" name="plec" value="0" <?php if(!$_POST['plec']) { echo 'checked'; } ?>>Mężczyzna</input>
-                    <input id="plec" type="radio" name="plec" value="1" <?php if($_POST['plec']) { echo 'checked'; } ?>>Kobieta</input>
+                    <input id="plec" type="radio" name="plec" value="0" <?php if(!$_POST['plec']) { echo 'checked'; } ?>>
+                        Mężczyzna
+                    </input>
+                    <input id="plec" type="radio" name="plec" value="1" <?php if($_POST['plec']) { echo 'checked'; } ?>>
+                        Kobieta
+                    </input>
                 </td>
             </tr>
             <tr>
@@ -83,21 +87,32 @@ if($error){
     echo $error_string;
 }
 else {
+    $form_array = array('imie' => sanitize_string($_POST['imie']), 'nazwisko' => sanitize_string($_POST['nazwisko']),
+        'plec' => sanitize_string($_POST['plec']), 'nazw_panienskie' => sanitize_string($_POST['nazw_panienskie']),
+        'email' => sanitize_string($_POST['email']), 'kod_pocztowy' => sanitize_string($_POST['kod_pocztowy']));
+
+    if(isset($_SESSION['added_count'])) {
+        $_SESSION['users'][$_SESSION['added_count']] = $form_array;
+        $_SESSION['added_count']++;
+    } else {
+        $_SESSION['users'][0] = $_SESSION['added_count'];
+        $_SESSION['added_count'] = 1;
+    }
     ?>
     <table>
         <tr>
             <td>Imię:</td>
-            <td><?php echo sanitize_string($_POST['imie']) ?></td>
+            <td><?php echo $form_array['imie'] ?></td>
         </tr>
         <tr>
             <td><label for="nazwisko">Nazwisko:</label></td>
-            <td><?php echo sanitize_string($_POST['nazwisko']) ?></td>
+            <td><?php echo $form_array['nazwisko'] ?></td>
         </tr>
         <tr>
             <td><label for="plec">Płeć:</label></td>
             <td>
                 <?php
-                    if($_POST['plec']) {
+                    if($form_array['plec']) {
                         echo 'Mężczyzna';
                     } else {
                         echo 'Kobieta';
@@ -107,15 +122,15 @@ else {
         </tr>
         <tr>
             <td>Nazwisko panieńskie:</td>
-            <td><?php echo sanitize_string($_POST['nazw_panienskie']) ?></td>
+            <td><?php echo $form_array['nazw_panienskie'] ?></td>
         </tr>
         <tr>
             <td>Email:</td>
-            <td><?php echo sanitize_string($_POST['email']) ?></td>
+            <td><?php echo $form_array['email'] ?></td>
         </tr>
         <tr>
             <td>Kod pocztowy:</td>
-            <td><?php echo sanitize_string($_POST['kod_pocztowy']) ?></td>
+            <td><?php echo $form_array['kod_pocztowy'] ?></td>
         </tr>
     </table>
 <?php
