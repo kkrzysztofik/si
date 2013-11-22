@@ -12,7 +12,7 @@ function check_if_exists($elements_array) {
     $error = false;
 
     foreach($elements_array as $key => $value){
-        if(empty($_POST[$key])){
+        if(empty($_POST[$key]) && !isset($_POST[$key])){
             $error_string = $error_string . $value . ' nie jest podany <br>';
             $error = true;
         }
@@ -95,7 +95,7 @@ else {
         $_SESSION['users'][$_SESSION['added_count']] = $form_array;
         $_SESSION['added_count']++;
     } else {
-        $_SESSION['users'][0] = $_SESSION['added_count'];
+        $_SESSION['users'][0] = $form_array;
         $_SESSION['added_count'] = 1;
     }
     ?>
@@ -112,7 +112,7 @@ else {
             <td><label for="plec">Płeć:</label></td>
             <td>
                 <?php
-                    if($form_array['plec']) {
+                    if(!$form_array['plec']) {
                         echo 'Mężczyzna';
                     } else {
                         echo 'Kobieta';

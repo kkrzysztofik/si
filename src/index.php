@@ -61,7 +61,7 @@
 		</div>
 		<div id="footer"><?php
             if(isset($_SESSION['added_count'])) {
-                echo "W tej sesji dodano " . $_SESSION['added_count'] . "użytkowników";
+                echo "W tej sesji dodano " . $_SESSION['added_count'] . " użytkowników";
             }
             ?></div>
 	</div>
