@@ -1,6 +1,6 @@
 <?php
 
-if (isset($_SESSION['added_count'])) {
+if (count($_SESSION['users'])) {
     foreach ($_SESSION['users'] as $form_array) {
         ?>
         <table>

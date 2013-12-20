@@ -1,6 +1,9 @@
 <?php
 
 function sanitize_string($string) {
+    if(empty($string)) {
+        return "";
+    }
     return strip_tags(htmlspecialchars($string));
 }
 

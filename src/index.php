@@ -1,4 +1,9 @@
-<?php session_start(); ?>
+<?php
+session_start();
+if(!isset($_SESSION['users'])) {
+    $_SESSION['users'] = array();
+}
+?>
 
 <!DOCTYPE html
 	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
@@ -60,10 +65,8 @@
 			</div>
 		</div>
 		<div id="footer"><?php
-            if(isset($_SESSION['added_count'])) {
-                echo "W tej sesji dodano " . $_SESSION['added_count'] . " użytkowników";
-            }
-            ?></div>
+            echo "W tej sesji dodano " . count($_SESSION['users']) . " użytkowników";
+            ?>&nbsp;</div>
 	</div>
 </body>
 </html>
