@@ -27,6 +27,10 @@ if(isset($_POST['wyslij'])) {
         $error_string = $error_string . 'Email jest nieprawidłowy!<br>';
         $error = true;
     }
+    if(!preg_match('/^[0-9]{2}+\-[0-9]{3}$/D', $_POST["kod_pocztowy"])) {
+        $error_string = $error_string . 'Kod pocztowy jest nieprawidłowy!<br>';
+        $error = true;
+    }
 } else {
     $error = true;
 }
@@ -91,6 +95,19 @@ else {
         'plec' => sanitize_string($_POST['plec']), 'nazw_panienskie' => sanitize_string($_POST['nazw_panienskie']),
         'email' => sanitize_string($_POST['email']), 'kod_pocztowy' => sanitize_string($_POST['kod_pocztowy']));
 
+    if ($form_array["plec"]) {
+        $plec = 1;
+    } else {
+        $plec = 0;
+    }
+
+    $sql = "INSERT INTO formularz (imie, nazwisko, plec, nazw_panienskie, email, kod_pocztowy) VALUES ('".$form_array["imie"]."', '".$form_array["nazwisko"]."','"
+        .$plec."', '".$form_array['nazw_panienskie']."', '".$form_array["email"]."', '".$form_array["kod_pocztowy"]."');";
+    //echo $sql;
+    $result = mysql_query($sql);
+    if (!$result) {
+        die('Invalid query: ' . mysql_error());
+    }
     array_push($_SESSION['users'], $form_array);
     ?>
     <table>

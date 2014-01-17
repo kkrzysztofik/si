@@ -1,7 +1,20 @@
 <?php
+require_once('inc/config.php');
+
 session_start();
 if(!isset($_SESSION['users'])) {
     $_SESSION['users'] = array();
+}
+
+$bd = mysql_connect($db_host, $db_user, $db_password);
+if (!$bd) {
+    exit('<p>Nie można skontaktować się ' .
+        'w tej chwili z baza danych.</p>');
+}
+
+if (!mysql_select_db($db)) {
+    exit('<p>Nie można zlokalizować ' .
+        'w tej chwili bazy danych.</p>');
 }
 ?>
 
@@ -30,6 +43,9 @@ if(!isset($_SESSION['users'])) {
                     </li>
                     <li>
                         <a href="index.php?site=2">Zawartość sesji</a>
+                    </li>
+                    <li>
+                        <a href="index.php?site=3">Baza pracowników</a>
                     </li>
                 </ul>
 			</div>
@@ -60,6 +76,9 @@ if(!isset($_SESSION['users'])) {
                         case 2:
                             include_once('sites/sesja.php');
                             break;
+                        case 3:
+                            include_once('sites/baza.php');
+                            break;
                     }
                 ?>
 			</div>
@@ -70,3 +89,6 @@ if(!isset($_SESSION['users'])) {
 	</div>
 </body>
 </html>
+<?php
+    mysql_close($bd);
+?>
