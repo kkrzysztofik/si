@@ -16,18 +16,26 @@ $start = ($page - 1) * $employees_perPage;
 
 $SQL = 'SELECT COUNT(*) FROM formularz;';
 $wynik1 = mysql_query($SQL);
+if (!$wynik1) {
+    die('Invalid query: ' . mysql_error());
+}
 $num1 = mysql_result($wynik1, 0, 'Count(*)');
 
-$SQL = 'SELECT COUNT(*) FROM formularz ORDER BY id asc LIMIT'.$start.','.$employees_perPage.';';
+$SQL = 'SELECT COUNT(*) FROM formularz ORDER BY id asc LIMIT '.$start.','.$employees_perPage.';';
 $wynik = mysql_query($SQL);
+if (!$wynik) {
+    die('Invalid query: ' . mysql_error());
+}
 $num = mysql_result($wynik, 0, 'Count(*)');
 
 $max=ceil($num1/$employees_perPage);
 
-$SQL = 'SELECT * FROM formularz ORDER BY id asc LIMIT'.$start.','.$employees_perPage.';';
+$SQL = 'SELECT * FROM formularz ORDER BY id asc LIMIT '.$start.','.$employees_perPage.';';
 $rows = mysql_query($SQL);
+if (!$rows) {
+    die('Invalid query: ' . mysql_error());
+}
 ?>
-
     <table>
         <tr>
             <td>ID</td>
@@ -39,8 +47,7 @@ $rows = mysql_query($SQL);
             <td>Kod pocztowy</td>
         </tr>
         <?php
-        for ($i = 0; $i < $num; $i++) {
-            $result = mysql_fetch_assoc($rows);
+        while ($result = mysql_fetch_assoc($rows)) {
             ?>
             <tr>
                 <td> <?php echo sanitize_string($result['id']); ?> </td>

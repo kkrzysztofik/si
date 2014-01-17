@@ -1,59 +1,92 @@
 <?php
-echo("Wynik wyszukiwania");
-echo("<br/>");
-echo("dla: ");
-$bd = @mysql_connect('phpmyadmin6.lh.pl', 'mzwiech', 'informatyka');
 
-if (!$bd) {
-    exit('<p>Nie można skontaktować się ' .
-        'w tej chwili z baza danych.</p>');
+include_once('inc/common.php');
+
+if(isset($_POST["szukaj"])){
+    $_SESSION['zapytanie'] = sanitize_string($_POST["zapytanie"]);
 }
 
-if (!mysql_select_db('mzwiech_mczenczak')) {
-    exit('<p>Nie można zlokalizować ' .
-        'w tej chwili bazy danych.</p>');
+echo("Wynik wyszukiwania dla: ". $_SESSION['zapytanie']);
+
+if (!empty($_GET['page']) && isset($_GET['page']) && is_numeric($_GET['page'])) {
+    $page = (int) $_GET['page'];
+    if ($page < 1) {
+        $page = 1;
+    }
+} else {
+    $page = 1;
 }
 
-$tmp =$_SESSION['zapytanie'];
-echo($tmp);
+$start = ($page - 1) * $employees_perPage;
 
-$zapytanieSQL="SELECT * FROM osoba WHERE nazwisko LIKE '%$tmp%' ORDER BY id ASC";
-$wynik = mysql_query ($zapytanieSQL);
-$num=mysql_numrows($wynik);
-mysql_close ($bd);
+$SQL="SELECT COUNT(*) FROM formularz WHERE nazwisko LIKE '%$tmp%' ORDER BY id ASC";
+$wynik1 = mysql_query($SQL);
+$num1 = mysql_result($wynik1, 0, 'Count(*)');
+
+$SQL = "SELECT COUNT(*) FROM formularz WHERE nazwisko LIKE '%".$tmp."%' ORDER BY id asc LIMIT".$start.','.$employees_perPage.';';
+$wynik = mysql_query($SQL);
+$num = mysql_result($wynik, 0, 'Count(*)');
+
+$max=ceil($num1/$employees_perPage);
+
+$SQL = "SELECT * FROM formularz WHERE nazwisko LIKE '%".$tmp."%' ORDER BY id asc LIMIT".$start.','.$employees_perPage.';';
+$rows = mysql_query($SQL);
 ?>
-<table border="4">
+
+<table>
     <tr>
-        <td align="left"> id </td>
-        <td> Imie</td>
-        <td> Nazwisko</td>
-        <td> Plec</td>
-        <td> Naz. Pan.</td>
-        <td> Email</td>
-        <td> Kod pocztowy</td>
+        <td>ID</td>
+        <td>Imię</td>
+        <td>Nazwisko</td>
+        <td>Płeć</td>
+        <td>Nazwisko panieńskie</td>
+        <td>Email</td>
+        <td>Kod pocztowy</td>
     </tr>
     <?php
-    $i=0;
-    while ($i < $num) {
-        $id=mysql_result($wynik,$i,"id");
-        $imie=mysql_result($wynik,$i,"imie");
-        $nazwisko=mysql_result($wynik,$i,"nazwisko");
-        $plec=mysql_result($wynik,$i,"plec");
-        $nazwisko_p=mysql_result($wynik,$i,"nazwisko_p");
-        $email=mysql_result($wynik,$i,"email");
-        $kod=mysql_result($wynik,$i,"kod");
+    for ($i = 0; $i < $num; $i++) {
+        $result = mysql_fetch_assoc($rows);
         ?>
         <tr>
-            <td align="left"> <?php echo $id; ?> </td>
-            <td> <?php echo $imie; ?></td>
-            <td> <?php echo $nazwisko; ?></td>
-            <td> <?php echo $plec; ?></td>
-            <td> <?php echo $nazwisko_p; ?></td>
-            <td> <?php echo $email; ?></td>
-            <td> <?php echo $kod; ?></td>
+            <td> <?php echo sanitize_string($result['id']); ?> </td>
+            <td> <?php echo sanitize_string($result['imie']); ?></td>
+            <td> <?php echo sanitize_string($result['nazwisko']); ?></td>
+            <td> <?php if($result['plec']) { echo 'Kobieta'; } else { echo 'Mężczyzna'; }; ?></td>
+            <td> <?php echo sanitize_string($result['nazw_panienskie']); ?></td>
+            <td> <?php echo sanitize_string($result['email']); ?></td>
+            <td> <?php echo sanitize_string($result['kod_pocztowy']); ?></td>
         </tr>
-        <?php
-        $i++;
+    <?php
     }
     ?>
 </table>
+<div id="paging">
+    <?php
+    /////////////////////////////////////////////////////////////
+    $prev = $page - 1;
+    $next = $page + 1;
+
+    ///..................numery stron
+    if($prev > 0) {
+        echo '<a href="/index.php?site=3&page='.$prev.'"><-</a>';
+    } else {
+        echo '<-';
+    }
+
+    for($i=0; $i<$max; $i++)
+    {
+        $tmp = $i + 1;
+        echo '<a href="/index.php?site=3&page='.$tmp.'">'.$tmp.'</a>';
+        if(($i!=$max)-1)
+            echo" |";
+
+    }
+
+    if($next<$max){
+        echo '<a href="/index.php?site=3&page='.$next.'">-></a>';
+    } else {
+        echo '->';
+    }
+
+    ?>
+</div>
