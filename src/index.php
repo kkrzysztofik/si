@@ -50,14 +50,10 @@ if (!mysql_select_db($db)) {
                 </ul>
 			</div>
             <div id="right">
-                <ul>
-                    <li>
-                        <a href="http://google.com">google.com</a>
-                    </li>
-                    <li>
-                        <a href="http://www.wp.pl">www.wp.pl</a>
-                    </li>
-                </ul>
+                <form action="index.php?site=4" method="post">
+                    <input type="text" maxlength="30" name="zapytanie"/>
+                    <input type="submit" value="szukaj" name="szukaj"/>
+                </form>
             </div>
 			<div id="center">
                 <?php
@@ -78,6 +74,9 @@ if (!mysql_select_db($db)) {
                             break;
                         case 3:
                             include_once('sites/baza.php');
+                            break;
+                        case 4:
+                            include_once('sites/szukaj.php');
                             break;
                     }
                 ?>

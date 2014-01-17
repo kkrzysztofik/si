@@ -18,13 +18,13 @@ $SQL = 'SELECT COUNT(*) FROM formularz;';
 $wynik1 = mysql_query($SQL);
 $num1 = mysql_result($wynik1, 0, 'Count(*)');
 
-$SQL = 'SELECT COUNT(*) FROM formularz ' . "ORDER BY id asc LIMIT $start, $employees_perPage";
+$SQL = 'SELECT COUNT(*) FROM formularz ORDER BY id asc LIMIT'.$start.','.$employees_perPage.';';
 $wynik = mysql_query($SQL);
 $num = mysql_result($wynik, 0, 'Count(*)');
 
 $max=ceil($num1/$employees_perPage);
 
-$SQL = 'SELECT * FROM formularz ' . "ORDER BY id asc LIMIT $start, $employees_perPage";
+$SQL = 'SELECT * FROM formularz ORDER BY id asc LIMIT'.$start.','.$employees_perPage.';';
 $rows = mysql_query($SQL);
 ?>
 
