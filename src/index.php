@@ -8,12 +8,12 @@ if(!isset($_SESSION['users'])) {
 
 $bd = mysql_connect($db_host, $db_user, $db_password);
 if (!$bd) {
-    exit('<p>Nie można skontaktować się ' .
-        'w tej chwili z baza danych.</p>');
+    exit('<p>Nie można połączyć się ' .
+        'w tej chwili z bazą danych.</p>');
 }
 
 if (!mysql_select_db($db)) {
-    exit('<p>Nie można zlokalizować ' .
+    exit('<p>Nie można wybrać ' .
         'w tej chwili bazy danych.</p>');
 }
 ?>
@@ -47,6 +47,12 @@ if (!mysql_select_db($db)) {
                     <li>
                         <a href="index.php?site=3">Baza pracowników</a>
                     </li>
+                    <li>
+                        <a href="index.php?site=5">Edycja</a>
+                    </li>
+                    <li>
+                        <a href="index.php?site=6">Usuwanie</a>
+                    </li>
                 </ul>
 			</div>
             <div id="right">
@@ -77,6 +83,18 @@ if (!mysql_select_db($db)) {
                             break;
                         case 4:
                             include_once('sites/szukaj.php');
+                            break;
+                        case 5:
+                            include_once('sites/edycja.php');
+                            break;
+                        case 6:
+                            include_once('sites/usuwanie.php');
+                            break;
+                        case 7:
+                            include_once('sites/formularz_edycja.php');
+                            break;
+                        case 8:
+                            include_once('sites/formularz_usun.php');
                             break;
                     }
                 ?>
