@@ -1,5 +1,13 @@
 <?php
 
+include_once('inc/common.php');
+
+$is_permitted = check_permission(1);
+
+if(!$is_permitted) {
+    die('Permission denited');
+}
+
 if (count($_SESSION['users'])) {
     foreach ($_SESSION['users'] as $form_array) {
         ?>

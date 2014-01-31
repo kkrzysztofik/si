@@ -2,6 +2,12 @@
 
 include_once('inc/common.php');
 
+$is_permitted = check_permission(1);
+
+if(!$is_permitted) {
+    die('Permission denited');
+}
+
 if(isset($_POST["szukaj"])){
     $_SESSION['zapytanie'] = sanitize_string($_POST["zapytanie"]);
 }

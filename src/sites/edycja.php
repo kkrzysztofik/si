@@ -2,6 +2,13 @@
 
 include_once('inc/common.php');
 
+$is_permitted = check_permission(2);
+
+if(!$is_permitted) {
+    die('Permission denited');
+}
+
+
 if (!empty($_GET['page']) && isset($_GET['page']) && is_numeric($_GET['page'])) {
     $page = (int) $_GET['page'];
     if ($page < 1) {

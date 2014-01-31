@@ -5,6 +5,11 @@ session_start();
 if(!isset($_SESSION['users'])) {
     $_SESSION['users'] = array();
 }
+if(!isset($_SESSION['user_id'])) {
+    $_SESSION['user_id'] = 0;
+    $_SESSION['permission'] = 0;
+}
+
 
 $bd = mysql_connect($db_host, $db_user, $db_password);
 if (!$bd) {
@@ -38,29 +43,72 @@ if (!mysql_select_db($db)) {
                     <li>
                         <a href="index.php?site=0">Strona główna</a>
                     </li>
-                    <li>
-                        <a href="index.php?site=1">Formularz</a>
-                    </li>
-                    <li>
-                        <a href="index.php?site=2">Zawartość sesji</a>
-                    </li>
-                    <li>
-                        <a href="index.php?site=3">Baza pracowników</a>
-                    </li>
-                    <li>
-                        <a href="index.php?site=5">Edycja</a>
-                    </li>
-                    <li>
-                        <a href="index.php?site=6">Usuwanie</a>
-                    </li>
+                    <?php
+                        if($_SESSION['permission'] >= 1) {
+                            echo '  <li>
+                                        <a href="index.php?site=1">Formularz</a>
+                                    </li>
+                                    <li>
+                                        <a href="index.php?site=2">Zawartość sesji</a>
+                                    </li>
+                                    <li>
+                                        <a href="index.php?site=3">Baza pracowników</a>
+                                    </li>
+                                    <li>
+                                        <a href="index.php?site=11">Zmiana danych</a>
+                                    </li>';
+                        }
+                        if($_SESSION['permission'] >= 2) {
+                            echo '<li>
+                                    <a href="index.php?site=5">Edycja</a>
+                                  </li>';
+                        }
+                        if($_SESSION['permission'] >= 3) {
+                            echo '<li>
+                                    <a href="index.php?site=6">Usuwanie</a>
+                                  </li>';
+                        }
+                        if($_SESSION['permission'] >= 4) {
+                            echo '  <li>
+                                        <a href="index.php?site=12">Zmiana poziomu</a>
+                                    </li>
+                                    <li>
+                                        <a href="index.php?site=13">Usuwanie użytkowników</a>
+                                    </li>';
+                        }
+                    ?>
                 </ul>
 			</div>
             <div id="right">
-                <form action="index.php?site=4" method="post">
-                    <input type="text" maxlength="30" name="zapytanie"/>
-                    <input type="submit" value="szukaj" name="szukaj"/>
-                </form>
+                <ul>
+                    <?php if(!$_SESSION['user_id']) {
+                        echo '<li>
+                                <a href="index.php?site=9">Zaloguj</a>
+                              </li>';
+                    } else {
+                        echo '<li>
+                                <a href="index.php?site=13">Wyloguj</a>
+                              </li>';
+                    }
+                    ?>
+                    <li>
+                        <a href="index.php?site=10">Rejestracja</a>
+                    </li>
+                </ul>
+                <?php
+
+                if($_SESSION['permission'] >= 1) {
+                    echo '<form action="index.php?site=4" method="post">
+                                <input type="text" maxlength="30" name="zapytanie"/>
+                                <input type="submit" value="szukaj" name="szukaj"/>
+                          </form>';
+                }
+
+                ?>
             </div>
+            <div id="footer"><?php
+                echo "W tej sesji dodano " . count($_SESSION['users']) . " użytkowników";
+                ?>&nbsp;</div>
 			<div id="center">
                 <?php
                     if(!isset($_GET['site'])) {
@@ -96,13 +144,28 @@ if (!mysql_select_db($db)) {
                         case 8:
                             include_once('sites/formularz_usun.php');
                             break;
+                        case 9:
+                            include_once('sites/login.php');
+                            break;
+                        case 10:
+                            include_once('sites/rejestracja.php');
+                            break;
+                        case 11:
+                            include_once('sites/zmiana_danych.php');
+                            break;
+                        case 12:
+                            include_once('sites/zmiana_poziomu.php');
+                            break;
+                        case 13:
+                            include_once('sites/usuniecie_uzytkownika.php');
+                            break;
+                        case 14:
+                            include_once('sites/wyloguj.php');
+                            break;
                     }
                 ?>
 			</div>
 		</div>
-		<div id="footer"><?php
-            echo "W tej sesji dodano " . count($_SESSION['users']) . " użytkowników";
-            ?>&nbsp;</div>
 	</div>
 </body>
 </html>

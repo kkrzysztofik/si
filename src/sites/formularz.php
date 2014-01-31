@@ -1,6 +1,12 @@
 <?php
 include_once("inc/common.php");
 
+$is_permitted = check_permission(1);
+
+if(!$is_permitted) {
+    die('Permission denited');
+}
+
 $error = false;
 $error_string = "";
 

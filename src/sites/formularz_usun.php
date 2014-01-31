@@ -1,5 +1,14 @@
 <?php
 
+include_once("inc/common.php");
+
+$is_permitted = check_permission(3);
+
+if(!$is_permitted) {
+    die('Permission denited');
+}
+
+
 $idpracownika= (int) $_GET['id'];
 
 $SQL = "SELECT COUNT(*) FROM formularz WHERE id='".$idpracownika."';";
