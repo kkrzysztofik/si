@@ -166,6 +166,9 @@ if (!mysql_select_db($db)) {
                         case 14:
                             include_once('sites/logout.php');
                             break;
+                        case 15:
+                            include_once('sites/potwierdz_user.php');
+                            break;
                     }
                 ?>
 			</div>
