@@ -74,7 +74,7 @@ if (!$rows) {
 
     ///..................numery stron
     if($prev > 0) {
-        echo '<a href="/index.php?site=13&page='.$prev.'"><-</a>';
+        echo '<a href="index.php?site=13&page='.$prev.'"><-</a>';
     } else {
         echo '<-';
     }
@@ -82,14 +82,14 @@ if (!$rows) {
     for($i=0; $i<$max; $i++)
     {
         $tmp = $i + 1;
-        echo '<a href="/index.php?site=13&page='.$tmp.'">'.$tmp.'</a>';
+        echo '<a href="index.php?site=13&page='.$tmp.'">'.$tmp.'</a>';
         if(($i!=$max)-1)
             echo" |";
 
     }
 
-    if($next<$max){
-        echo '<a href="/index.php?site=13&page='.$next.'">-></a>';
+    if($next<=$max){
+        echo '<a href="index.php?site=13&page='.$next.'">-></a>';
     } else {
         echo '->';
     }

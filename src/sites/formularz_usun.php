@@ -19,7 +19,7 @@ if (!$rows) {
 
 $num = mysql_result($rows, 0, 'Count(*)');
 if (!$num) {
-    header('Location: /index.php?site=6');
+    header('Location: index.php?site=6');
 }
 
 if(isset($_POST["tak"])) {
@@ -30,12 +30,12 @@ if(isset($_POST["tak"])) {
     }
 
     echo("Operacja wykonana pomyślnie");
-    echo ('<form action="/index.php?site=6" method="post">
+    echo ('<form action="index.php?site=6" method="post">
                 <input type="submit" value="OK" name="OK"/>
            </form>');
 
 } else if(isset($_POST["nie"])) {
-    header('Location: /index.php?site=6');
+    header('Location: index.php?site=6');
 } else {
     $strSQL = "SELECT * FROM formularz WHERE ID='$idpracownika'";
     $result = mysql_query($strSQL);

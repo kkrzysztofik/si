@@ -18,7 +18,7 @@ function check_if_exists($elements_array) {
     $error = false;
 
     foreach($elements_array as $key => $value){
-        if(empty($_POST[$key]) && !isset($_POST[$key])){
+        if(empty($_POST[$key]) or !isset($_POST[$key])){
             $error_string = $error_string . $value . ' nie jest podany <br>';
             $error = true;
         }

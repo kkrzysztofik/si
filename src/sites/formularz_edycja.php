@@ -18,7 +18,7 @@ function check_if_exists($elements_array) {
     $error = false;
 
     foreach($elements_array as $key => $value){
-        if(empty($_POST[$key]) && !isset($_POST[$key])){
+        if(empty($_POST[$key]) or !isset($_POST[$key])){
             $error_string = $error_string . $value . ' nie jest podany <br>';
             $error = true;
         }
@@ -29,6 +29,8 @@ function check_if_exists($elements_array) {
 
 if(isset($_POST['wyslij'])) {
     $error = check_if_exists($elements);
+//    var_dump($_POST);
+
     if(!preg_match('/^[a-zA-Z0-9\.\-_]+\@[a-zA-Z0-9\.\-_]+\.[a-z]{2,4}$/D', $_POST['email'])) {
         $error_string = $error_string . 'Email jest nieprawidłowy!<br>';
         $error = true;
@@ -52,7 +54,7 @@ if (!$rows) {
 $row = mysql_fetch_assoc($rows);
 //var_dump($row);
 if (!$row) {
-    header('Location: /index.php?site=5');
+    header('Location: index.php?site=5');
 }
 
 if($error){
@@ -112,7 +114,7 @@ if($error){
             <tr>
                 <td colspan="2">
                     <input name="wyslij" type="submit" value="Potwierdź zmiany" />
-                    <button type="button"><a href="/index.php?site=5">Odrzuć zmiany</a></button>
+                    <button type="button"><a href="index.php?site=5">Odrzuć zmiany</a></button>
                 </td>
             </tr>
         </table>

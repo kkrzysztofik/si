@@ -8,8 +8,11 @@ if(!$is_permitted) {
     die('Permission denited');
 }
 
-
 $idpracownika= (int) $_GET['id'];
+
+if($idpracownika == $_SESSION['user_id']){
+    die('Nie możesz zmienić sobie uprawnień.');
+}
 
 $SQL = "SELECT COUNT(*) FROM user WHERE id='".$idpracownika."';";
 $rows = mysql_query($SQL);
@@ -19,7 +22,7 @@ if (!$rows) {
 
 $num = mysql_result($rows, 0, 'Count(*)');
 if (!$num) {
-    header('Location: /index.php?site=13');
+    header('Location: index.php?site=13');
 }
 
 if(isset($_POST["tak"])) {
@@ -30,12 +33,12 @@ if(isset($_POST["tak"])) {
     }
 
     echo("Operacja wykonana pomyślnie");
-    echo ('<form action="/index.php?site=13" method="post">
+    echo ('<form action="index.php?site=13" method="post">
                 <input type="submit" value="OK" name="OK"/>
            </form>');
 
 } else if(isset($_POST["nie"])) {
-    header('Location: /index.php?site=13');
+    header('Location: index.php?site=13');
 } else {
     $strSQL = "SELECT * FROM user WHERE ID='$idpracownika'";
     $result = mysql_query($strSQL);

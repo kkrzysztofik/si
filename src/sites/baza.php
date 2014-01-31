@@ -27,12 +27,12 @@ if (!$wynik1) {
 }
 $num1 = mysql_result($wynik1, 0, 'Count(*)');
 
-$SQL = 'SELECT COUNT(*) FROM formularz ORDER BY id asc LIMIT '.$start.','.$employees_perPage.';';
-$wynik = mysql_query($SQL);
-if (!$wynik) {
-    die('Invalid query: ' . mysql_error());
-}
-$num = mysql_result($wynik, 0, 'Count(*)');
+//$SQL = 'SELECT COUNT(*) FROM formularz ORDER BY id asc LIMIT '.$start.','.$employees_perPage.';';
+//$wynik = mysql_query($SQL);
+//if (!$wynik) {
+//    die('Invalid query: ' . mysql_error());
+//}
+//$num = mysql_result($wynik, 0, 'Count(*)');
 
 $max=ceil($num1/$employees_perPage);
 
@@ -76,7 +76,7 @@ $next = $page + 1;
 
 ///..................numery stron
 if($prev > 0) {
-    echo '<a href="/index.php?site=3&page='.$prev.'"><-</a>';
+    echo '<a href="index.php?site=3&page='.$prev.'"><-</a>';
 } else {
     echo '<-';
 }
@@ -84,14 +84,14 @@ if($prev > 0) {
 for($i=0; $i<$max; $i++)
 {
     $tmp = $i + 1;
-    echo '<a href="/index.php?site=3&page='.$tmp.'">'.$tmp.'</a>';
+    echo '<a href="index.php?site=3&page='.$tmp.'">'.$tmp.'</a>';
     if(($i!=$max)-1)
         echo" |";
 
 }
 
-if($next<$max){
-    echo '<a href="/index.php?site=3&page='.$next.'">-></a>';
+if($next<=$max){
+    echo '<a href="index.php?site=3&page='.$next.'">-></a>';
 } else {
     echo '->';
 }

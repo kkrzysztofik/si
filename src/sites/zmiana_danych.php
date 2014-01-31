@@ -36,7 +36,7 @@ if (!$rows) {
 $row = mysql_fetch_assoc($rows);
 //var_dump($row);
 if (!$row) {
-    header('Location: /index.php');
+    header('Location: index.php');
 }
 
 if(isset($_POST['wyslij'])) {
@@ -118,7 +118,7 @@ if($error){
             <tr>
                 <td colspan="2">
                     <input name="wyslij" type="submit" value="Potwierdź zmiany" />
-                    <button type="button"><a href="/index.php?site=5">Odrzuć zmiany</a></button>
+                    <button type="button"><a href="index.php?site=5">Odrzuć zmiany</a></button>
                 </td>
             </tr>
         </table>

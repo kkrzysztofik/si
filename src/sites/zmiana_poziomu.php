@@ -24,7 +24,7 @@ if(isset($_POST['wyslij'])) {
     if (!$result || $result != 1) {
         die('Invalid query: ' . mysql_error());
     }
-    header('Location: /index.php?site=12');
+    header('Location: index.php?site=12');
 }
 
 if (!empty($_GET['page']) && isset($_GET['page']) && is_numeric($_GET['page'])) {
@@ -104,7 +104,7 @@ if (!$rows) {
 
     ///..................numery stron
     if($prev > 0) {
-        echo '<a href="/index.php?site=12&page='.$prev.'"><-</a>';
+        echo '<a href="index.php?site=12&page='.$prev.'"><-</a>';
     } else {
         echo '<-';
     }
@@ -112,14 +112,14 @@ if (!$rows) {
     for($i=0; $i<$max; $i++)
     {
         $tmp = $i + 1;
-        echo '<a href="/index.php?site=12&page='.$tmp.'">'.$tmp.'</a>';
+        echo '<a href="index.php?site=12&page='.$tmp.'">'.$tmp.'</a>';
         if(($i!=$max)-1)
             echo" |";
 
     }
 
-    if($next<$max){
-        echo '<a href="/index.php?site=12&page='.$next.'">-></a>';
+    if($next<=$max){
+        echo '<a href="index.php?site=12&page='.$next.'">-></a>';
     } else {
         echo '->';
     }
