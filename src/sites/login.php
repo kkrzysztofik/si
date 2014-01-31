@@ -8,7 +8,6 @@ if(isset($_POST['zaloguj'])) {
     $mdpassw = md5($password);
 
     $SQL = "SELECT * FROM user WHERE login='".$login."' AND haslo='".$mdpassw."';";
-    echo $SQL;
 
     $wynik1 = mysql_query($SQL);
     if (!$wynik1) {
@@ -43,7 +42,7 @@ if(isset($_POST['zaloguj'])) {
             </tr>
             <tr>
                 <td colspan="2">
-                    <input name="zaloguj" type="submit" value="Zalogu" />
+                    <input name="zaloguj" type="submit" value="Zaloguj" />
                 </td>
             </tr>
         </table>

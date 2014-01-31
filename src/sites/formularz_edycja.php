@@ -52,7 +52,7 @@ if (!$rows) {
 $row = mysql_fetch_assoc($rows);
 //var_dump($row);
 if (!$row) {
-    http_redirect('/index.php?site=5');
+    header('Location: /index.php?site=5');
 }
 
 if($error){

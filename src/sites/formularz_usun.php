@@ -19,7 +19,7 @@ if (!$rows) {
 
 $num = mysql_result($rows, 0, 'Count(*)');
 if (!$num) {
-    http_redirect('/index.php?site=6');
+    header('Location: /index.php?site=6');
 }
 
 if(isset($_POST["tak"])) {
@@ -35,7 +35,7 @@ if(isset($_POST["tak"])) {
            </form>');
 
 } else if(isset($_POST["nie"])) {
-    http_redirect('/index.php?site=6');
+    header('Location: /index.php?site=6');
 } else {
     $strSQL = "SELECT * FROM formularz WHERE ID='$idpracownika'";
     $result = mysql_query($strSQL);
