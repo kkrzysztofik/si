@@ -87,7 +87,7 @@ if (!mysql_select_db($db)) {
                               </li>';
                     } else {
                         echo '<li>
-                                <a href="index.php?site=13">Wyloguj</a>
+                                <a href="index.php?site=14">Wyloguj</a>
                               </li>';
                     }
                     ?>
@@ -107,7 +107,11 @@ if (!mysql_select_db($db)) {
                 ?>
             </div>
             <div id="footer"><?php
-                echo "W tej sesji dodano " . count($_SESSION['users']) . " użytkowników";
+                if($_SESSION['user_id']) {
+                    echo "W tej sesji dodano " . count($_SESSION['users']) . " użytkowników";
+                } else {
+                    echo 'Footer';
+                }
                 ?>&nbsp;</div>
 			<div id="center">
                 <?php
@@ -160,7 +164,7 @@ if (!mysql_select_db($db)) {
                             include_once('sites/usuniecie_uzytkownika.php');
                             break;
                         case 14:
-                            include_once('sites/wyloguj.php');
+                            include_once('sites/logout.php');
                             break;
                     }
                 ?>
