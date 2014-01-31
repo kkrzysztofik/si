@@ -4,15 +4,16 @@ include_once("inc/common.php");
 $error = false;
 $error_string = "";
 
-$elements = array('imie' => 'Imię', 'nazwisko' => 'Nazwisko', 'login' => 'Login', 'haslo' => 'Hasło',
-    'powt_haslo' => 'Powtórne hasło');
+$elements = array('imie' => 'Imię', 'nazwisko' => 'Nazwisko', 'login' => 'Login',
+    'haslo' => 'Hasło', 'powt_haslo' => 'Powtórne hasło'
+);
 
 function check_if_exists($elements_array) {
     global $error_string;
     $error = false;
 
     foreach($elements_array as $key => $value){
-        if(empty($_POST[$key]) && !isset($_POST[$key])){
+        if(empty($_POST[$key]) or !isset($_POST[$key])){
             $error_string = $error_string . $value . ' nie jest podany <br>';
             $error = true;
         }

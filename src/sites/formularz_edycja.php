@@ -10,7 +10,7 @@ if(!$is_permitted) {
 $error = false;
 $error_string = "";
 
-$elements = array('imie' => 'Imię', 'nazwisko' => 'Nazwisko', 'plec' => 'Płeć', 'nazw_panienskie' => 'Nazwisko panieńskie',
+$elements = array('imie' => 'Imię', 'nazwisko' => 'Nazwisko', 'nazw_panienskie' => 'Nazwisko panieńskie',
     'email' => 'Email', 'kod_pocztowy' => 'Kod pocztowy');
 
 function check_if_exists($elements_array) {
@@ -26,7 +26,6 @@ function check_if_exists($elements_array) {
 
     return $error;
 }
-
 if(isset($_POST['wyslij'])) {
     $error = check_if_exists($elements);
 //    var_dump($_POST);
@@ -34,10 +33,12 @@ if(isset($_POST['wyslij'])) {
     if(!preg_match('/^[a-zA-Z0-9\.\-_]+\@[a-zA-Z0-9\.\-_]+\.[a-z]{2,4}$/D', $_POST['email'])) {
         $error_string = $error_string . 'Email jest nieprawidłowy!<br>';
         $error = true;
+        $_POST['email'] = "";
     }
     if(!preg_match('/^[0-9]{2}+\-[0-9]{3}$/D', $_POST["kod_pocztowy"])) {
         $error_string = $error_string . 'Kod pocztowy jest nieprawidłowy!<br>';
         $error = true;
+        $_POST['kod_pocztowy'] = "";
     }
 } else {
     $error = true;

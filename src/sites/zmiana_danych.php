@@ -10,15 +10,16 @@ if(!$is_permitted) {
 $error = false;
 $error_string = "";
 
-$elements = array('imie' => 'Imię', 'nazwisko' => 'Nazwisko', 'login' => 'Login', 'haslo' => 'Hasło',
-    'powt_haslo' => 'Powtórne hasło');
+$elements = array('imie' => 'Imię', 'nazwisko' => 'Nazwisko', 'login' => 'Login',
+//    'haslo' => 'Hasło', 'powt_haslo' => 'Powtórne hasło'
+);
 
 function check_if_exists($elements_array) {
     global $error_string;
     $error = false;
 
     foreach($elements_array as $key => $value){
-        if(empty($_POST[$key]) && !isset($_POST[$key])){
+        if(empty($_POST[$key]) or !isset($_POST[$key])){
             $error_string = $error_string . $value . ' nie jest podany <br>';
             $error = true;
         }
@@ -54,10 +55,13 @@ if(isset($_POST['wyslij'])) {
     if(strlen($form_array['login']) < 6) {
         $error_string = $error_string . 'Login jest za krótki, wymagane min. 6 znaków<br>';
         $error = true;
+        $_POST['login'] = "";
     }
-    if(strlen($form_array['haslo']) < 6) {
+    if(strlen($form_array['haslo']) > 0 and strlen($form_array['haslo']) < 6) {
         $error_string = $error_string . 'Hasło jest za krótkie, wymagane min. 6 znaków<br>';
         $error = true;
+        $_POST['haslo'] = "";
+        $_POST['powt_haslo'] = "";
     }
 
     //check if login is unique
@@ -68,8 +72,9 @@ if(isset($_POST['wyslij'])) {
         die('Invalid query: ' . mysql_error());
     }
     $num1 = mysql_num_rows($wynik1);
+    $result = mysql_fetch_assoc($wynik1);
 
-    if($num1) {
+    if($num1 and $_SESSION['user_id'] != $result['id']) {
         $error_string = $error_string . 'Login zajęty<br>';
         $error = true;
     }
@@ -131,8 +136,11 @@ else {
         'haslo' => sanitize_string($_POST['haslo']), 'login' => sanitize_string($_POST['login'])
     );
 
-    $sql = "UPDATE user SET imie='".$form_array["imie"]."', nazwisko='".$form_array["nazwisko"]."',
-    haslo='".md5($form_array['haslo'])."', login='".$form_array["login"]."' WHERE id=".$_SESSION['user_id'].";";
+    $sql = "UPDATE user SET imie='".$form_array["imie"]."', nazwisko='".$form_array["nazwisko"]."',";
+    if(sizeof($form_array['haslo'])){
+        $sql = $sql . "haslo='".md5($form_array['haslo'])."',";
+    }
+    $sql = $sql . "login='".$form_array["login"]."' WHERE id=".$_SESSION['user_id'].";";
     //echo $sql;
     $result = mysql_query($sql);
     if (!$result) {
